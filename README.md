@@ -1,3 +1,3 @@
 # LandscapesData
 
-# This is a test file
+Este é um arquivo de teste.
