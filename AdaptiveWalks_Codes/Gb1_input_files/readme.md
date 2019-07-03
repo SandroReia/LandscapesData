@@ -2,7 +2,7 @@ This folder contains the codes that generate the Gb1 input files for the Adaptat
 
 In a few words, the two codes presented here gets the data from the Gb1 empirical landscape and split it into files that are used as input in the Adaptative Walks Codes. The Gb1 empirical landscape files, elife-16965-supp1-v4.xlsx and elife-16965-supp2-v4.xlsx, were obtained from N. C. Wu, L. Dai, C. A. Olson, J. O. Lloyd-Smith, and R. Sun, Elife 5, e16965 (2016).
 
-To generate the input files, we have to:
+To generate the input files, we have to download all the files to the same folder and:
 
 1 - run the python script preparing_Elife_1.py. One can do that by typing in the terminal (or powershell): 
 > python preparing_Elife_1.py
