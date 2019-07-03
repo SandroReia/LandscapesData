@@ -12,4 +12,8 @@ To run the code: ./script-random-hsp90
 
 To change the number of adaptive walks just change the script
 
+The code Adaptivewalk-prob-hsp90.cpp generates probabilistic adaptive walks in the Hsp90 landscape.
+
+The instructions are the same as the ones for the random version.
+
 
