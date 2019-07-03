@@ -22,7 +22,13 @@ To compile the code:c++ -O3 AdaptiveWalk-hsp90-randomfreq.cpp -o AdaptiveWalk-hs
 
 Tu rum the code: ./script-random-hsp90-freq
 
-4) 
+4) The code Adaptivewalk-hsp90-probfreq.cpp generates probabilistic adaptive walks in the Hsp90 landscape to calculate the frequency of the mutational pathways produced through the dynamics. So, the remaining information is exactly the same as in 3). 
+
+To compile the code:c++ -O3 AdaptiveWalk-hsp90-probfreq.cpp -o AdaptiveWalk-hsp90-probfreq -lm -lgsl -lgslcblas
+
+Tu rum the code: ./script-probabilistic-hsp90-freq
+
+
 
 
 
