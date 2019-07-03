@@ -16,4 +16,13 @@ To change the number of adaptive walks just change the script
 
 The instructions are the same as the ones for the random version.
 
+3) The code Adaptivewalk-hsp90-randomfreq.cpp generates random adaptive walks in the Hsp90 landscape to calculate the frequency of the mutational pathways produced through the dynamics. Note that the same information is used in 1), but in case one needs a better statistics for the evaluation of the path frequencies, which also warrants that a minimum number of walks is satisfied for every local optimum, the code is more appropriate. The input here is this minimum number of walks terminating at the least visited local optimum.
+
+To compile the code:c++ -O3 AdaptiveWalk-hsp90-randomfreq.cpp -o AdaptiveWalk-hsp90-randomfreq -lm -lgsl -lgslcblas
+
+Tu rum the code: ./script-random-hsp90-freq
+
+4) 
+
+
 
