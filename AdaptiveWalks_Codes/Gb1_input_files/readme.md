@@ -9,6 +9,7 @@ To generate the input files, all the files presented here have to be downloaded 
 
 2 - run the fortran code preparing_Elife_2.f90. This can be done by typing in the terminal (or powershell): 
 > gfortran preparing_Elife_2.f90 -o elife
+and then
 > ./elife
 
 As a result of the actions (1) and (2) described above, four files will be created. These files are used as input files for the Adaptative Walks Codes.
