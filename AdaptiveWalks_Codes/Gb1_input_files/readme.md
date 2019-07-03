@@ -9,6 +9,7 @@ To generate the input files, all the files presented here have to be downloaded 
 
 2 - run the fortran code preparing_Elife_2.f90. This can be done by typing in the terminal (or powershell): 
 > gfortran preparing_Elife_2.f90 -o elife
+
 and then
 > ./elife
 
