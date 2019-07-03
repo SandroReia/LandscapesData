@@ -204,22 +204,10 @@ def plotando_rede_nova(wild, Rede_dict, DPaths):
     mapa_cor = []
     for node in H.nodes():
         mapa_cor.append(cores[node])
-        
-    # --- Criando vetor com paths
-    nos = []
-    fit = []
-    for key in dFit:
-        nos.append(key)
-        fit.append(dFit[key])
-    args = np.argsort(fit)
-    patchs = []
-    for i in args:
-        patchs.append(mpatches.Patch(color = cmap(fit[i] / freqmax)))
 
     # --- Carregando paleta de cores
     #cmap = get_cmap('Reds')
     cmap = get_cmap('viridis')
-
     
     # --- Percorrendo os maximos locais 
     for local in DPaths.maximo.unique():
@@ -242,7 +230,6 @@ def plotando_rede_nova(wild, Rede_dict, DPaths):
             # --- Adicionando links 
             for k in range(len(v) - 1):
                 H.add_edge(v[k], v[k + 1], color = cmap(fatia2["freq"][c]), zorder = 1 - fatia2["freq"][c])
-
            
         # --- Definindo vetor que nos da os tamanos dos nos 
         tnos = [] 
@@ -328,42 +315,50 @@ def plotando_rede_nova(wild, Rede_dict, DPaths):
     H = nx.DiGraph()
     # --- Adicionando nos 
     H.add_nodes_from(G.nodes())
-    # --- Adicionando links 
-    for no in Rede_dict:
-        for viz in Rede_dict[no]:
-            # --- Verificando se o fitting eh maior que o da wild 
-            if dFit[no] >= dFit[wild]:
-                # --- Verificando se o fitting do vizinho eh maior que o fitting da configuracao 
-                if dFit[viz] > dFit[no]:
-                    # --- Adicionando link
-                    H.add_edge(no, viz)
-            
-    # --- Definindo vetor que nos da os tamanos dos nos 
-    tnos = [] 
-    for no in H.nodes():
-        if no in local:
-            tnos.append(120)
-        else:
-            tnos.append(20)
-                                          
+    
     # --- Plotando figura 
     plt.figure(figsize = (10, 10))
-    # --- Desenhando os nos 
-    nx.draw_networkx_nodes(H, pos = posicoes, node_size = tnos, node_color = mapa_cor, alpha = 1.0)
-    for l in local:
-        nx.draw_networkx_nodes(H, pos = posicoes, nodelist = [l], node_size = 120, edgecolors = "black", node_color = cores[l], alpha = 1.0)
-
-    nx.draw_networkx_edges(H, pos = posicoes, edge_color = "orange", arrowstyle = "->", alpha = 0.5, width = 1)
-
-    plt.axis("off")
     
+    # --- Desenhando os nos 
+    nx.draw_networkx_nodes(H, pos = posicoes, node_size = tnos, node_color = mapa_cor, alpha = 1.0)  
+    
+    # --- Percorrendo os maximos locais 
+    for local in DPaths.maximo.unique():
+        # --- Fatiando o dataframe 
+        fatia1 = DPaths[DPaths["maximo"] == local].sort_values(by = "freq", ascending = True).tail(1000).reset_index(drop = True)
+        # --- Copiando dataframe
+        fatia2 = fatia1
+        # --- Normalizando
+        fatia2["freq"] = 1 - fatia2["freq"] / fatia2["freq"].max()
+                
+        # --- Percorrendo as configuracoes
+        for c in range(len(fatia2)):
+            # --- Determinando o vetor 
+            v = fatia2["config"][c]
+            # --- Adicionando links 
+            for k in range(len(v) - 1):
+                H.add_edge(v[k], v[k + 1], color = cmap(fatia2["freq"][c]), zorder = 1 - fatia2["freq"][c])
+           
+        # --- Definindo vetor que nos da os tamanos dos nos 
+        tnos = [] 
+        for no in H.nodes():
+            if no == local:
+                tnos.append(120)
+            else:
+                tnos.append(20)
+            
+        # --- Pegando vetor de cores
+        colors = [H[u][m]['color'] for u,m in H.edges()]   
+        
+        nx.draw_networkx_nodes(H, pos = posicoes, nodelist = [local], node_size = 120, edgecolors = "black", node_color = cores[local], alpha = 1.0)
+        nx.draw_networkx_edges(H, pos = posicoes, edge_color = "orange", arrowstyle = "->", alpha = 0.5, width = 1)
     # --- Desenhando labels
     nx.draw_networkx_labels(H, label_positions, labels)
-    
+    plt.axis("off")
     #plt.legend(frameon = False, handles = patchs)
     plt.tight_layout()
     plt.show()
-    plt.savefig("figrede_all_w_links.pdf" % local)   
+    plt.savefig("figrede_all_w_links.pdf")
         
     # --- Retornando
     return None
@@ -387,7 +382,7 @@ def plotando_distribuicao_fitness(raw_data, title):
     plt.xlabel("fitness")
     plt.ylabel("Frequency")
     plt.title("%s" % title)
-    plt.ylim(0, 5)
+    plt.ylim(0, 0.5)
     #plt.legend(frameon = False)
     plt.show()
     plt.tight_layout()
@@ -398,7 +393,7 @@ def plotando_distribuicao_fitness(raw_data, title):
 # ---------------------------------------------------------------------------- #
 
 # --- Interrompendo execucao do programa
-#raise(SystemExit)
+raise(SystemExit)
 
 # --- Lendo arquivo 
 raw_data = pd.read_csv("HSP90_fitness_landscape.txt", sep = "\t")
@@ -408,8 +403,11 @@ wild = raw_data["aaSeq"][0]
 # --- Determinando maximo global 
 mGlobal = raw_data["aaSeq"].loc[raw_data["median"].idxmax()]
 
-# --- Lendo a rede 
-Rede_dict = criando_rede_de_configuracoes(raw_data)
+# --- Lendo a rede
+try: 
+    Rede_dict = json.load(open("Rede_dict.txt"))
+except:
+    Rede_dict = criando_rede_de_configuracoes(raw_data)
 
 # --- Criando rotina que determina os maximos locais 
 dFit, mLocais = Determinando_Maximos_Locais(raw_data, Rede_dict)
