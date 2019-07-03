@@ -1,5 +1,5 @@
 
-The code Adaptivewalk-random-hsp90.cpp generates random adaptive walks in the Hsp90 landscape.
+1)The code Adaptivewalk-random-hsp90.cpp generates random adaptive walks in the Hsp90 landscape.
 
 As output one has estimates for mean walk length, predictability, mean path divergence, accessibility for each local optimum; and finally fitness values of those local optima.
 
@@ -12,7 +12,7 @@ To run the code: ./script-random-hsp90
 
 To change the number of adaptive walks just change the script
 
-The code Adaptivewalk-prob-hsp90.cpp generates probabilistic adaptive walks in the Hsp90 landscape.
+2) The code Adaptivewalk-prob-hsp90.cpp generates probabilistic adaptive walks in the Hsp90 landscape.
 
 The instructions are the same as the ones for the random version.
 
