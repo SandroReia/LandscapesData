@@ -34,6 +34,12 @@ To compile the code:c++ -O3 AdaptiveWalk-GB1-randomfreq.cpp -o AdaptiveWalk-GB1-
 
 Tu run the code: ./script-GB1-randomfreq
 
+6) The code Adaptivewalk-GB1-probfreq.cpp generates probabilistic adaptive walks in the GB1 fitness landscape to calculate the frequency of the mutational pathways produced through the dynamics, but also mean walk length, predictability, mean path divergence and accessibility for each local optimum. The remaining information is exactly the same as in 5).
+
+To compile the code:c++ -O3 AdaptiveWalk-GB1-probfreq.cpp -o AdaptiveWalk-GB1-probfreq -lm -lgsl -lgslcblas
+
+Tu run the code: ./script-GB1-probabilistic_freq
+
 
 
 
