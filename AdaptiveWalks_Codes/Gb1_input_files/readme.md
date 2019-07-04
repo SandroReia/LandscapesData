@@ -1,6 +1,6 @@
 This folder contains the codes that generate the Gb1 input files for the Adaptative Walks Codes. 
 
-In a few words, the two codes presented here gets the data from the Gb1 empirical landscape and split it into files that are used as input in the Adaptative Walks Codes. The Gb1 empirical landscape files, **elife-16965-supp1-v4.xlsx** and **elife-16965-supp2-v4.xlsx**, were obtained from N. C. Wu, L. Dai, C. A. Olson, J. O. Lloyd-Smith, and R. Sun, Elife 5, e16965 (2016).
+In a few words, the two codes presented here get the data from the Gb1 empirical landscape and split it into files that are used as input in the Adaptative Walks Codes. The Gb1 empirical landscape files, **elife-16965-supp1-v4.xlsx** and **elife-16965-supp2-v4.xlsx**, were obtained from N. C. Wu, L. Dai, C. A. Olson, J. O. Lloyd-Smith, and R. Sun, Elife 5, e16965 (2016).
 
 To generate the input files, all the files presented here have to be downloaded to the same folder and:
 
